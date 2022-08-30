@@ -1,9 +1,15 @@
 package pages;
 
+import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
+import org.openqa.selenium.support.ui.Select;
+
+import javax.sql.rowset.FilteredRowSet;
+import java.util.ArrayList;
+import java.util.List;
 
 
 public class HomePage {
@@ -14,7 +20,7 @@ public class HomePage {
 
     @FindBy(className = "shopping_cart_link")
     WebElement iconoCarrito;
-////div[text()='Sauce Labs Backpack']
+    ////div[text()='Sauce Labs Backpack']
     @FindBy(id = "add-to-cart-sauce-labs-backpack")
     WebElement sauceLabsBackAddToCartButton;
 
@@ -43,22 +49,7 @@ public class HomePage {
         sauceLabsBackPackRemoveButton.click();
     }
 
-    // FILTROS -----------------------------------------
-    @FindBy(className = "product_sort_container")
-    WebElement containerFiltros;
-    public void clickOnContainer(){
-        containerFiltros.click();
-    }
-    public String getTextFiltros(){
-        String textoFiltros = containerFiltros.getText();
-        return textoFiltros;
-    }
-    /*
-    public String selectFiltro(){
 
-        return ;
-    }
-    */
     // MENU -----------------------------------------
 
     @FindBy(id = "react-burger-menu-btn")
@@ -96,4 +87,43 @@ public class HomePage {
         boolean verifyElementBotonBack = botonBackToProducts.isDisplayed();
         return verifyElementBotonBack;
     }
+
+    //----------------------------------FILTROS------------------------
+
+    // FILTROS -----------------------------------------
+
+    @FindBy(className = "product_sort_container")
+    WebElement productFilterDropDown;
+
+    public void selectProductFilter(String element){
+        Select selectObject = new Select(productFilterDropDown);
+        selectObject.selectByVisibleText(element);
+    }
+
+    @FindBy(className = "inventory_item_price")
+    List<WebElement> itemPricesLabel;
+
+    public List<Double> getAllItemPrices(){
+        List<Double> prices = new ArrayList<>();
+
+        for (WebElement itemPrice: itemPricesLabel){
+            String itemPriceText = itemPrice.getText();
+            StringBuilder sb = new StringBuilder(itemPriceText);
+            sb.deleteCharAt(0);
+            prices.add(Double.parseDouble(sb.toString()));
+        }
+        return prices;
+    }
+
+    //------------------------------------------
+
+    @FindBy(className = "shopping_cart_link")
+    WebElement botonCarrito;
+
+    public void clickOnCartButton(){
+        botonCarrito.click();
+    }
+
+
+
 }
