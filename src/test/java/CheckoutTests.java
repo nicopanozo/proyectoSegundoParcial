@@ -41,6 +41,4 @@ public class CheckoutTests extends BaseTest {
         Assert.assertTrue(homePage.verifyAppLogo());
     }
 
-
-
 }

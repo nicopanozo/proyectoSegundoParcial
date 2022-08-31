@@ -14,14 +14,17 @@ public class DescriptionPage {
         PageFactory.initElements(driver,this);
     }
     @FindBy(id = "add-to-cart-sauce-labs-backpack")
-    WebElement addToCartButton;
+    WebElement addToCartButtonBackPack;
+
+    @FindBy(id = "add-to-cart-sauce-labs-bike-light")
+    WebElement addToCartButtonBikeLight;
 
     @FindBy(className = "shopping_cart_link")
     WebElement iconoCarrito;
 
 
     public void clickOnAddToCart(){
-        addToCartButton.click();
+        addToCartButtonBackPack.click();
     }
 
     public String getTextItemCarrito(){
@@ -29,6 +32,10 @@ public class DescriptionPage {
         return textoCarrito;
     }
     public void clickOnAddBackPack(){
-        addToCartButton.click();
+        addToCartButtonBackPack.click();
+    }
+
+    public void clickOnAddBikeLight(){
+        addToCartButtonBikeLight.click();
     }
 }
